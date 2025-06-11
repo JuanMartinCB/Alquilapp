@@ -1,0 +1,75 @@
+<!--Nav Bar-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
+    <div class="container-fluid">
+        <%# <a class="navbar-brand" href="#">Alquilapp</a> %>
+        <a class="navbar-brand" href="/"><%= image_tag("log1.png", :alt => "Alquilapp", :class => "logo") %></a>
+        <%# <a><%=link_to "Alquilapp", root_path, class:"navbar-brand"</a> %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"   data-bs-target="#navbarsCollapse" aria-bs-controls="navbarsCollapse"  aria-expanded="false" aria-label="Toggle navigation" id="sideBar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                <%# <% if user_signed_in? && current_user.admin? %> 
+                    <li class="nav-item ">
+                        <a><%= link_to "Vehiculos", vehicles_path, class:"nav-link active"%></a>
+                    </li>
+                <%# <% end %>
+                <li class="nav-item">
+                    <a><%= link_to "Nosotros", about_index_path, class:"nav-link active"%></a>
+                </li>
+                <% if user_signed_in? && current_user.supervisor? %>
+                    <li class="nav-item">
+                        <a><%= link_to "Inconvenientes", report_index_path, class:"nav-link active"%></a>
+                    </li>
+                <% end %>
+                <li class="nav-item">
+                    <%# <a class="nav-link active" arial-current="page" href="#">#1</a> %>
+                </li>
+                <li class="nav-item">
+                    <%# <a class="nav-link active" arial-current="page" href="#">#1</a> %>
+                </li>    
+                <%if user_signed_in? && (current_user.admin? || current_user.supervisor?) %>
+                    <li class="nav-item">
+                        <a><%= link_to "Panel de usuarios", panel_index_path, class:"nav-link active"%></a>
+                    </li>
+                <%end%>
+                <% if user_signed_in? && current_user.supervisor? %>
+                    <li class="nav-item">
+                        <a><%= link_to "Ver Licencias", licenses_path, class:"nav-link active"%></a>
+                    </li>
+                <% end %>
+                <% if user_signed_in? && !current_user.admin? && Rental.find_by(user_id: current_user.id, state: "active")%>
+                    <li class="nav-item">
+                        <a><%= link_to "Mi alquiler", rental_path(Rental.find_by(user_id: current_user.id, state: "active").id), class:"nav-link active"%></a>
+                    </li>
+                <% end %>
+            </ul>
+            <% if user_signed_in? && current_user.supervisor? %>
+                <span style= "color: white; margin: 6px"> Hola supervisor: <%= current_user.name %> <%= current_user.surname %>! <i class="bi bi-shield-check" aria-hidden="true"> </i></span>
+            <% else %>
+            <% if user_signed_in? && current_user.admin? %>
+                <span style="color:white; margin: 6px" > Hola administrador: <%= current_user.name %> <%= current_user.surname %>! <i class="bi bi-bookmark-star" aria-hidden="true"> </i></span>
+            <% else %>
+            <% if user_signed_in? %>
+                <span style="color:white; margin: 6px" > Hola usuario: <%= current_user.name %> <%= current_user.surname %>! <i class="bi bi-person-circle" aria-hidden="true"> </i></span>
+            <% end %>
+            <% end %>
+            <% end %>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Mi Cuenta
+                </button>
+                <ul class="dropdown-menu">
+                <%if user_signed_in?%>
+                    <li><%=link_to 'Mi perfil', profile_path(current_user),  class:"dropdown-item" %></li>
+                    <li><%=link_to 'Mi billetera', wallet_path(current_user),  class:"dropdown-item" %></li>
+                    <li><%=link_to 'Editar cuenta', edit_user_registration_path(current_user),  class:"dropdown-item" %></li>
+                    <li><%=link_to 'Cerrar sesión', destroy_user_session_path,  class:"dropdown-item" %></li>
+                <%else%>
+                    <li><%=link_to 'Ingresar', user_session_path, class:"dropdown-item" %></li>
+                    <li><%=link_to 'Registrarse', new_user_registration_path, class:"dropdown-item" %></li>
+                <%end%>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>   

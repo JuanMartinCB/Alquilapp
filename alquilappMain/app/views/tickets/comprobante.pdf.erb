@@ -1,0 +1,81 @@
+<section style="padding: 1em; border: solid;border-radius: 1em">
+  <div style="margin: auto">
+    <div>
+      <h1 style="text-align: center">Comprobante de Transaccion</h1>
+    </div>
+    <div>
+      Fecha: <%= Time.now.strftime("%d/%m/%Y") %>
+      <span> ||  Hora: <%= Time.now.strftime("%H:%M:%S") %> </span>
+    </div>
+    <div>
+      <p>Numero de Comprobante: 
+      <%case%>
+      <% when @ticket.id< 1000 %>
+      0000<%=@ticket.id%>
+      <% when @ticket.id < 10000 %>
+      000<%=@ticket.id%>
+      <% when @ticket.id < 100000 %>
+      00<%=@ticket.id%>
+      <% when @ticket.id < 1000000 %>
+      0<%=@ticket.id%>
+      <% else %>
+      <%=@ticket.id%>
+      <% end %>
+      </p>
+    </div>
+    <div>
+      <p>Compania: Alquilapp</p>
+    </div>
+    <div>
+      <p>Usuario: <%= User.find(@ticket.user_id).full_name %></p>
+    </div>
+    <div>
+      <p>Motivo: <%= @ticket.wtransaction.wtype %></p>
+    </div>
+    <p style="border: solid; height: 1px"></p>
+    <%# if !@ticket.wtransaction.wtype == ("Ingreso" || "Multa" || "Deposito")%>
+    <%if !(@ticket.wtransaction.wtype == "Ingreso") || !(@ticket.wtransaction.wtype == "Multa") %>
+      <div>
+        <h4 style="margin-bottom: -0.8em">Vehiculo: </h4>
+        <p style="margin-bottom: -0.8em">Marca: <%= Vehicle.find(Rental.find(@ticket.rental_id).vehicle_id).brand %></li> </p>
+        <p style="margin-bottom: -0.8em">Modelo: <%= Vehicle.find(Rental.find(@ticket.rental_id).vehicle_id).model %></li></p>
+        <p style="margin-bottom: -0.8em">Anio: <%= Vehicle.find(Rental.find(@ticket.rental_id).vehicle_id).year %></li></p>
+        <p style="margin-bottom: -0.8em">Patente: <%= Vehicle.find(Rental.find(@ticket.rental_id).vehicle_id).patent %></li></p> 
+      </div>
+      <h4 style="margin-bottom: -0.8em">Informacion de Alquiler: </h4>
+      <div>
+        <p style="margin-bottom: -0.8em">Fecha: <%= Rental.find(@ticket.rental_id).created_at.strftime("%d/%m/%Y") %></p>
+      </div>
+      <div>
+        <p style="margin-bottom: -0.8em">Hora de Inicio: <%= Rental.find(@ticket.rental_id).created_at.strftime("%H:%M:%S") %></p>
+      </div>
+      <div>
+        <p style="margin-bottom: -0.8em">Hora de Fin: <%= Rental.find(@ticket.rental_id).finish_at.strftime("%H:%M:%S") %></p>
+      </div>
+      <div>
+        <p style="margin-bottom: -0.8em">Horas de Alquiler: <%= Rental.find(@ticket.rental_id).hours %> hs</p>
+      </div>
+      <div>
+        <p style="margin-bottom: -0.8em">Tiempo Excedido: <%= Rental.find(@ticket.rental_id).extra_cost %> min</p>
+      </div>
+    <%end%>
+    <h4 style="margin-bottom: -0.8em"> Informacion de la cuenta: </h4>
+    <div>
+      <p style="margin-bottom: -0.8em">Saldo anterior: <%= @ticket.wtransaction.balance %>$</p>
+    </div>
+    <div>
+      <%if @ticket.wtransaction.entry < 0%>
+        <div>
+          <p style="margin-bottom: -0.8em">Costo: <%= -@ticket.wtransaction.entry %>$</p>
+        </div>
+      <%else%>
+        <div>
+          <p style="margin-bottom: -0.8em">Deposito: <%= @ticket.wtransaction.entry %>$</p>
+        </div>
+      <%end%>
+    </div>
+    <div>
+      <p>Saldo actual: <%= @ticket.wtransaction.new_balance%>$</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<div id="<%= dom_id rental %>">
+  <p>
+  </p>
+
+  <p>
+    <strong>Vehiculo:</strong>
+    <%= Vehicle.find(rental.vehicle_id).brand %> <%=Vehicle.find(rental.vehicle_id).model %>
+  </p>
+  <p>
+    <strong>Patente:</strong>
+    <%= Vehicle.find(rental.vehicle_id).patent %> 
+  </p>
+  <!--
+  <p>
+    <strong>Estado:</strong>
+    <%= rental.state %>
+  </p>
+
+  <p>
+    <strong>Punto de inicio:</strong>
+    <%= rental.start_point %>
+  </p>
+
+  <p>
+    <strong>Punto final:</strong>
+    <%= rental.end_point %>
+  </p>
+
+
+  <p>
+    <strong>Finalizado:</strong>
+    <%= rental.finish_at %>
+  </p>
+  -->
+
+</div>

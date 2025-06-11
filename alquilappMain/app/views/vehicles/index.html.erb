@@ -1,0 +1,72 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12 col-sm-8 col-md-10 col-lg-6 col-xl-9">
+    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+      <div class="margenesT" class="card-body p-5">
+        <div class="titleT">
+          <% if user_signed_in? && (current_user.admin?) %>
+              <button type="button" class="btn btn-floating">
+                <i class="bi bi-plus-circle">
+                <%= link_to "Nuevo vehiculo", new_vehicle_path, class:"text-decoration-none"%> </i>
+              </button>   
+          <%end%> 
+          <h2 class="mb-4 text-center">Vehiculos</h2>
+        </div>          
+        <div id="licenses">
+        <div class="container ">
+          <div class="row ">
+            <div class="col-2">
+                <h4>Filtrar por:</h4>
+                <%= simple_form_for :search, url: vehicles_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+                  <%= f.input :brand,label: "Marca", input_html:{class:"form-control", value:""}, required: false%>           
+                  <%= f.input :model,label: "Modelo", input_html:{class:"form-control", value:""}, required: false%>                 
+                  <%= f.input :vehicle_type,label: "Tipo", input_html:{class:"form-control", value:"", placeholder:"Auto, Camioneta, Utilitario..."}, required: false%>                                 
+                  <%= f.button :submit, "Buscar", class: "btn btn-primary" %>
+                  <%= link_to "Limpiar", vehicles_path, class: "btn btn-outline-primary" %>                               
+                <% end %>
+            </div>                                
+            <% if @vehicles.empty? %>
+              <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                  <%if user_signed_in? && (current_user.admin? || current_user.supervisor?)%>
+                    No hay vehiculos 
+                  <%else%>
+                    <%if @vehicles.published.empty?%>
+                      No hay vehiculos en este momento, por favor regrese mas tarde!
+                    <%end%>
+                  <%end%>
+                </div>
+              </div>
+            <% else %>
+              <% @vehicles.each do |vehicle|%>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 ">
+                  <div class="card ">
+                    <div class="card-body mb-0 ">
+                      <%= render vehicle %>
+                        <div class="mb-0 text-center">
+                          <%= link_to "Mostrar vehiculo", vehicle, class:"text-center text-decoration-none btn btn-outline-dark", style:"width:100%"%>
+                        </div>
+                      <div class="card-footer m-2 p-0">
+                        <div> 
+                          <% if vehicle.state == "published" %>
+                            <p class="text-center text-green">A: <%= distance(vehicle.id) %></p>
+                          <% else %>
+                            <p class="text-center text-danger"><%= vehicle.get_state %></p>
+                          <% end %>                          
+                        </div>
+                     </div>
+                   </div>
+                 </div>
+                </div>
+              <% end %>                  
+            <% end %>  
+            </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+ 

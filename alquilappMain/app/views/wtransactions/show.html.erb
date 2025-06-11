@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @wtransaction %>
+
+<div>
+  <%= link_to "Edit this wtransaction", edit_wtransaction_path(@wtransaction) %> |
+  <%= link_to "Back to wtransactions", wtransactions_path %>
+
+  <%= button_to "Destroy this wtransaction", @wtransaction, method: :delete %>
+</div>

@@ -1,0 +1,51 @@
+
+<!--<%= simple_form_for(@incident) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :user_id, label: "Usuario" %>
+    <%= f.hidden_field :vehicle_id, label: "Vehiculo" %>
+    <%= f.hidden_field :rental_id, label: "ID alquiler" %>
+    <%= f.input :description, label: "Descripción" %>
+    <%= f.input :image, label: "Imagen del incidente (opcional)"%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Reportar" %>
+  </div>
+<% end %>-->
+
+<div class="row d-flex justify-content-center align-items-center vh-100 gradient-custom">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-6 col-xxl-4">
+    <div class="card shadow" style="border-radius: 1rem;">
+      <div class="card-body p-5 text center">
+            <h2 class="d-flex justify-content-center py-4">Reportar incidente</h2>
+
+            <%= simple_form_for(@incident) do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+              <div class="form-inputs">
+                <%= f.hidden_field :user_id, label: "Usuario" %>
+                <%= f.hidden_field :vehicle_id, label: "Vehiculo" %>
+                <%= f.hidden_field :rental_id, label: "ID alquiler" %>
+                <span>Descripción</span>
+                <%#how to disable f.input text field resize%>
+                <%= f.input :description, label: false, input_html: {class:"form-control form-control-lg", style: "resize: none;"}%>                
+                <%# <div class="form-outline mb-2">
+                  <%= f.input :image, label: "Imagen del incidente (opcional)",input_html:{class:"form-control form-control-lg"}%>
+                <%#/div> %>
+              </div>
+
+              <div class="form-actions text-center">
+                <%= f.button :submit, "Reportar",input_html:{class:"btn btn-outline-dark"} %>
+              </div>
+            <% end %>
+            <div>
+              <%= link_to "Volver",:back %>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

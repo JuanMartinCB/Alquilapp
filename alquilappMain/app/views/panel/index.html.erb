@@ -1,0 +1,95 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-sm-8 col-md-8 col-lg-6 col-xl-9">
+      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="margenesT" class="card-body p-5">
+          <div class="titleT justify-center">
+            <h2 class="text-center mb-5">Usuarios</h2>
+          </div>
+          <div class="container">
+            <div class="row ">
+              <table class="table table-striped border center">
+                <thead class="centrado">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Admin</th>
+                    <th scope="col">Supervisor</th>
+                    <th scope="col">Usuario</th>
+                    <%if current_user.admin?%>
+                        <th scope="col">Eliminar</th>
+                    <%end%>
+                    <th scope="col"></th>
+                  </tr>
+                </thead> 
+                <tbody>
+                  <% @users.each do |user| %>
+                    <tr>        
+                      <td class="centrado"><%= user.name%></td>
+                      <td class="centrado"><%= user.surname%></td>                     
+                      <td class="centrado"><%= user.email%></td>                     
+                      <td class="centrado">
+                        <%if user.admin_role%>
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_admin_path(user) do%><i class="bi bi-check-circle text-success"></i><%end%>
+                            <%else%>
+                                <i class="bi bi-check-circle text-success"></i>
+                            <%end%>
+                        <%else%>                                
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_admin_path(user) do%><i class="bi bi-x-circle text-danger"></i><%end%>                                
+                            <%else%>
+                                <i class="bi bi-x-circle text-danger"></i>
+                            <%end%>
+                        <%end%>  
+                      </td>
+                      <td class="centrado">
+                        <%if user.supervisor_role%>
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_supervisor_path(user) do%><i class="bi bi-check-circle text-success"></i><%end%>
+                            <%else%>
+                                <i class="bi bi-check-circle text-success"></i>
+                            <%end%>
+                        <%else%>                                
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_supervisor_path(user) do%><i class="bi bi-x-circle text-danger"></i><%end%>                                
+                            <%else%>
+                                <i class="bi bi-x-circle text-danger"></i>
+                            <%end%>
+                        <%end%>  
+                      </td>
+                      <td class="centrado">
+                        <%if user.user_role%>
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_user_path(user) do%><i class="bi bi-check-circle text-success"></i><%end%>
+                            <%else%>
+                                <i class="bi bi-check-circle text-success"></i>
+                            <%end%>
+                        <%else%>                                
+                            <%if current_user.admin?%>
+                                <%= link_to update_role_user_path(user) do%><i class="bi bi-x-circle text-danger"></i><%end%>                                
+                            <%else%>
+                                <i class="bi bi-x-circle text-danger"></i>
+                            <%end%>
+                        <%end%>                            
+                      </td>
+                      <%if current_user.admin?%>
+                        <td class="centrado" ><%=link_to soft_delete_path(user) do%><i class="bi bi-trash3 text-body"></i><%end%></td>
+                      <%end%>
+                      <td class="centrado"><%= link_to "Ver perfil",profile_path(user.id)%></td>                                       
+                    </tr>                      
+                    <%end%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

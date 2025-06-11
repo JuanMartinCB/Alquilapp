@@ -1,0 +1,27 @@
+<div class="row d-flex justify-content-center align-items-center vh-100 gradient-custom">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-6 col-xxl-4">
+    <div class="card shadow" style="border-radius: 1rem;">
+      <div class="card-body p-5 text center">
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= f.error_notification message:"Por favor revise el correo"%>
+          <div class="form-inputs">
+            <div class="text-center">
+              <i class="bi bi-lock-fill" style="font-size: 5rem; color: #black;"></i>
+            </div>
+            <h2 class="d-flex justify-content-center my-4">Recuperar contraseña</h2>
+            <%= f.input :email,
+                    required: false,
+                    error:"No puede ir blanco",
+                    label:"Correo electrónico",
+                    autofocus: true,
+                    input_html: { autocomplete: "email", class:"form-control form-control-lg"} %>
+          </div>
+          <div class="form-actions text-center mt-4">
+            <%= f.button :submit, "Enviarme las instrucciones para restaurar la contraseña", class:"text-primary text-decoration-underline"%>
+          </div>
+        <% end %>
+        <%# <%= render "devise/shared/links" %>
+        </div>
+    </div>
+  </div>
+</div>

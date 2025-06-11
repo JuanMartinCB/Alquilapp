@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Wtransactions</h1>
+
+<div id="wtransactions">
+  <% @wtransactions.each do |wtransaction| %>
+    <%= render wtransaction %>
+    <p>
+      <%= link_to "Show this wtransaction", wtransaction %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New wtransaction", new_wtransaction_path %>

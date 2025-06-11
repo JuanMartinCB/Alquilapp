@@ -1,0 +1,94 @@
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-dark text-muted">
+    <!-- Section: Social media -->
+
+    <!-- Section: Social media -->
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>Alquilapp
+            </h6>
+            <p>
+            Una app hecha para vos, para que puedas alquilar vehiculos de manera facil y segura.
+            </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Contenido
+            </h6>
+            <p>
+                <a href="#!" class="text-reset">Contenido</a>
+            </p>
+            <p>
+                <a href="#!" class="text-reset">Contenido</a>
+            </p>
+            <p>
+                <a href="#!" class="text-reset">Contenido</a>
+            </p>
+            <p>
+                <a href="#!" class="text-reset">Contenido</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+            Usuario
+            </h6>
+            <%if user_signed_in?%>
+                <p>
+                    <%=link_to 'Mi perfil', profile_path(current_user),  class:"text-muted text-reset" %>
+                </p>
+                <p>
+                    <%=link_to 'Mi billetera', wallet_path(current_user),  class:"text-muted text-reset" %>
+                </p>
+                <p>
+                    <%=link_to 'Editar cuenta', edit_user_registration_path(current_user),  class:"text-muted text-reset" %>
+                <p>
+                    <%=link_to 'Cerrar sesión', destroy_user_session_path,  class:"text-muted text-reset" %>
+                </p>
+            <%else%>
+                <p>
+                    <%=link_to 'Ingresar', user_session_path, class:"text-reset" %>
+                </p>
+                <p>
+                    <%=link_to 'Registrarse', new_user_registration_path, class:"text-reset" %>
+                </p>
+            <% end %>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+            <p><i class="bi bi-geo-alt"></i> La Plata, Bs. As - Argentina</p>
+            <p>
+                <i class="bi bi-envelope"></i>
+                Alquilapp@gmail.com
+            </p>
+            <p><i class="bi bi-telephone"></i> +54 221 888 9999</p>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </div>
+    </section>
+<!-- Section: Links  -->
+
+<!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2022 Copyright: Todos los derechos reservados
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->

@@ -1,0 +1,32 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-6">
+    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+      <div class="margenesT" class="card-body p-5">
+        <div class="titleT">
+          <h2 class="mb-4 text-center">Nuevo alquiler</h2>
+        </div>
+        <div class="col">
+          <div class="row">
+            <%= image_tag Vehicle.find(@rental.vehicle_id).image%>
+            <h4 style="text-align: center; margin: 10px 0px 0px 0px"><%= Vehicle.find(@rental.vehicle_id).full_name%></h4>  
+          </div>
+          <div class="container">
+            <%= render "form", rental: @rental %>
+          </div>
+        </div>
+        <div class="text-left">
+          <button type="button" class="btn btn-floating">
+            <i class="bi bi-arrow-left-circle"> <%= link_to "Volver", :back, class:"text-decoration-none"%> </i>
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<%# <label for="customRange1" class="form-label">Example range</label>
+<input type="range" class="form-range" min="0" max="24" id="customRange1"> %>
+<!--<div><%=Time.now.strftime("%H:%M:%S") %></div> -->

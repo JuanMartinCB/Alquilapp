@@ -1,0 +1,65 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-sm-8 col-md-8 col-lg-6 col-xl-9">
+      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="margenesT" class="card-body p-5">
+          <div class="titleT justify-center">
+            <h2 class="text-center mb-5">Inconvenientes</h2>
+          </div>
+          <div class="container">
+            <div class="row ">
+              <table class="table table-striped border">
+                <thead class="centrado">
+                  <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Vehiculo</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Inconveniente</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead> 
+                <tbody>
+                  <% @incidents.each do |incident| %>
+                    <tr>        
+                      <td class="centrado"><%= User.find(incident.user_id).email%></td>
+                      <td class="centrado"><%= incident.vehicle_id%></td>                     
+                      <td class="centrado"><%= incident.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+                      <td class="centrado"><%= link_to "Ver",incident%></td>
+                      <%if incident.supervisor_id == nil%>
+                        <td><%= link_to assign_incident_path(incident.id) do%><i class="bi bi-bookmark-dash text-body"></i><%end%></td> <%#testear%>
+                      <%else%>
+                        <td><i class="bi bi-bookmark-check-fill"></i></td> <%#testear%>
+                      <%end%>
+                  <%end%>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <!--esto es para agregar accidentes en el ultimo sprint
+        <div class="col-6 border">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Vehiculo</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Fecha</th>
+              </tr>
+            </thead> 
+            <tbody>
+              <% @incidents.each do |incident| %>
+              <tr>        
+                  <td><%= incident.user_id%></td>
+                  <td><%= incident.vehicle_id%></td>                
+                  <td><%= incident.created_at.strftime("%d/%m/%Y") %></td>
+              <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>-->

@@ -1,0 +1,51 @@
+<%= simple_form_for(@card) do |f| %>
+  <div class="card-body">
+    <div class="row">
+      <%= f.error_notification %>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <%= f.input :name, label: "Nombre Completo", placeholder: "Ingrese su Nombre",input_html:{class:"form-control"} %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <%= f.input :number, label: "Numero de la Tarjeta", placeholder: "0000 0000 0000 0000", as: :numeric,input_html:{class:"form-control"}%>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+      <label>*Fecha de Vencimiento</label>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :expiration_month, label: false, placeholder: "MM", input_html:{class:"form-control", min: '01', max: '12'}%>
+          </div>
+          <div class="form-group">
+            <%= f.input :expiration_year, label: false, placeholder: "YYYY", input_html:{class:"form-control", min: Date.today.year, max: Date.today.year+10}%>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label>*Tipo Tarjeta</label>
+        <div class="form-group">
+          <%= f.input :ctype, label: false, as: :radio_buttons, collection: Card::CTYPES,  input_html:{class:"form-check-input mx-1 my-1",required: true}, item_wrapper_tag: :div %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <%= f.input :cvc, label: "CVC", placeholder: "CVC/CCV",input_html:{class:"form-control", min: '0', max: '999'}%>
+        </div>
+      </div>
+    </div>
+    <%= f.input :wallet_id, input_html:{ value: current_user.wallet.id}, as: :hidden%>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <%= f.button :submit, "Guardar Tarjeta", class: "btn-success"%>
+    </div>
+  </div>
+<% end %>

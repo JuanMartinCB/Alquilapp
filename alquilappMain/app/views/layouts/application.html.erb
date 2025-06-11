@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Alquilapp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!--a partir de aca los stylesheets-->
+    <%= stylesheet_link_tag "/assets/application", "data-turbo-track": "reload", media: "all" %>
+    <%= stylesheet_link_tag "stylesT.css", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "/assets/new_user_session", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "/assets/custombg.css", "data-turbo-track": "reload" %>
+    <!--a partir de aca js-->
+    <%= javascript_include_tag "/assets/application", "data-turbo-track": "reload", defer: true %>   
+    <%= javascript_include_tag "/assets/map.js", "data-turbo-track": "reload", defer: true %> 
+    <%= javascript_include_tag "/assets/time.js", "data-turbo-track": "reload", defer: true %> 
+    <%= favicon_link_tag asset_path('fav1.png') %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <!--scripts-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> 
+    <script src="https://unpkg.com/@googlemaps/js-api-loader@1.0.0/dist/index.min.js"></script>
+   
+  </head>  
+  <body class="d-flex flex-column min-vh-100">
+    <header class="site-header sticky-top  bg-dark mb-5">
+      <%= render "/main/navBar"%>
+    </header>
+    <main class="mb-auto">
+      <%= yield %>   
+      <%# <%= turbo_frame_tag "remote_modal", target: "_top" %> 
+    </main>
+    <div class="bg-dark">
+      <%=render "/main/footer"%>
+    </div>
+    <%= form_with url: locations_path, html: {id: "location-form"} do |f|%>
+      <%= f.hidden_field :lat %>
+      <%= f.hidden_field :lng %>
+    <%end%>
+    <!--NO TOCAR-->
+    <script>
+      // navigator.geolocation.getCurrentPosition((pos) => {
+      // document.querySelector("#lat").value = pos.coords.latitude;
+      // document.querySelector("#lng").value = pos.coords.longitude;
+      // document.querySelector("#location-form").requestSubmit();
+      // });
+    </script>
+    <script>
+      navigator.permissions.query({
+          name:'geolocation'
+        }).then(function(result) {
+          
+          console.log(result.state);
+          if (result.state == 'granted') {
+            navigator.geolocation.getCurrentPosition((pos) => {
+              document.querySelector("#lat").value = pos.coords.latitude;
+              document.querySelector("#lng").value = pos.coords.longitude;
+              document.querySelector("#location-form").requestSubmit();
+            });
+          } else if (result.state == 'prompt') {
+              navigator.geolocation.getCurrentPosition((pos) => {
+              document.querySelector("#lat").value = pos.coords.latitude;
+              document.querySelector("#lng").value = pos.coords.longitude;
+              document.querySelector("#location-form").requestSubmit();
+            });
+          } else if (result.state == 'denied') {
+            //do nothing
+          }        
+        });
+    </script>
+  </body>
+</html> 

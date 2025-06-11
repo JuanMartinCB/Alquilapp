@@ -1,0 +1,84 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12 col-sm-8 col-md-12 col-lg-6 col-xl-9">
+    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+      <div class="margenesT" class="card-body p-5">
+        <div class="titleT">
+          <h2 class="mb-4 text-center">Vehiculo</h2>
+        </div>
+        <div class="card-body mb-0 ">
+          <%= render 'vehicle2', vehicle: @vehicle %>
+          <div class="row">
+            <div class="col w-100">
+              <div class="mb-0 text-center">
+                <% if current_user.admin? %>                 
+                  <%= link_to "Editar", edit_vehicle_path(@vehicle), class:"text-center text-decoration-none btn btn-outline-dark"%>
+                  <% if @vehicle.published? == false && @vehicle.in_use? == false%>
+                    <%= link_to "Eliminar", vehicle_path(@vehicle), method: :delete, data: { confirm: "¿Estás seguro?" }, class:"text-center text-decoration-none btn btn-danger"%>
+                  <% end %>                  
+                  <% if @vehicle.published? == false && @vehicle.in_use? == false%>
+                    <%= link_to "Publicar", "/vehicles/#{@vehicle.id}/publish", class:"text-center text-decoration-none btn btn-success"%>
+                  <% end %>
+                  <% if @vehicle.in_use? == false && @vehicle.blocked? == false%>
+                    <%= link_to "Bloquear", block_path, class:"text-center text-decoration-none btn btn-warning"%>  
+                  <%end%> 
+                <%else%>
+                  <% if current_user.supervisor?%>
+                    <% if !@vehicle.blocked? && (!@vehicle.in_use? || @vehicle.draft?)%>
+                      <%= link_to "Bloquear", block_path, class:"text-center text-decoration-none btn btn-warning"%>  
+                    <%else%>
+                      <% if @vehicle.blocked? && (!@vehicle.in_use? || !@vehicle.draft?)%>
+                        <%= link_to "Publicar", "/vehicles/#{@vehicle.id}/publish", class:"text-center text-decoration-none btn btn-success"%>
+                      <%end%>
+                    <%end%>
+                  <%end%>
+                <%end%>
+              </div>
+            </div>
+              <% if !current_user.admin? && !current_user.supervisor?%> 
+                <% if current_user.license? && current_user.license.authorized? %>
+                  <%= link_to "Alquilar", rent_path(@vehicle.id), class:"text-center text-decoration-none btn btn-success"%>  
+                <%else%>              
+                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#xdmodal">
+                    Alquilar
+                  </button>
+
+                <%end%>
+              <%end%>
+          </div>
+        </div>
+        <div class="text-left">
+          <button type="button" class="btn btn-floating">
+            <i class="bi bi-arrow-left-circle"> <%= link_to "Volver a los vehiculos", vehicles_path, class:"text-decoration-none"%> </i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!--MODAL-->
+<div class="modal" tabindex="-1" id="xdmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hubo un problema...</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% if !current_user.license? %>
+          <p class="text text-danger">Para alquilar un vehiculo debes tener una licencia, por favor subela</p>
+          <%= link_to "Subir Licencia", new_license_path, class:"text-decoration-none btn btn-info"%>
+        <%else%>
+          <% if !current_user.license.authorized? %>
+            <p class="text text-danger">Para alquilar un vehiculo debes tener una licencia autorizada, por favor espera a que un supervisor la autorice</p>
+          <%end%>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

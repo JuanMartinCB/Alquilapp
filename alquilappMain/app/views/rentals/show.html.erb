@@ -1,0 +1,182 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-sm-8 col-md-12 col-lg-6 col-xl-9">
+      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="margenesT" class="card-body p-5">
+          <div class="titleT">
+            <h2 class="mb-4 text-center">Alquiler</h2>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-7 col-xl-6 mb-0">
+              <div class="card">
+                <h1 id="titulo">Datos del alquiler</h1>
+                <%= image_tag Vehicle.find(@rental.vehicle_id).image%>
+                <div style="margin-left: 2em"><%= render @rental %></div>
+              </div>
+            </div>
+          <div class="col-12 col-md-5 col-xl-6">
+            <div class="card text-center d-flex justify-content-center">
+              <div class="fs-3 mb-0">
+                <h1 id="titulo">Contador de horas de uso</h1>
+                <div id="clockdiv" data-h=<%=@rental.hours%>>
+                  <div style="display:none">
+                    <div class="smalltext">Dias</div>
+                    <span class="days"></span>
+                  </div>
+                  <div>
+                    <div class="smalltext">Horas</div>
+                    <span  class="hours" id="clkh"></span>
+                  </div>
+                  <div>
+                    <div class="smalltext">Minutos</div>
+                    <span class="minutes" id="clkm"></span>
+                  </div>
+                  <div>
+                    <div class="smalltext">Segundos</div>
+                    <span class="seconds" id="clks"></span>
+                  </div>
+                </div>
+                <% if notice %>
+                  <p class="notice"><%= notice %></p>
+                <% end %>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="mb-0 text-center">
+          <%# <%= link_to "Reportar accidente" , "#", class:"text-center text-decoration-none btn btn-danger" %>
+          <%= link_to "Reportar incidente" , incident2_path(@rental), class:"text-center text-decoration-none btn btn-warning display: none", id:"ribtn"%>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Extender horas
+          </button>
+          <%= link_to "Finalizar" , finish_rental_path(@rental.id), class:"text-center text-decoration-none btn btn-dark", id:"btnfinalizar"%>
+        </div>
+        <div class="text-left">
+          <button type="button" class="btn btn-floating">
+            <i class="bi bi-arrow-left-circle">
+              <%= link_to "Volver a los vehiculos" , vehicles_path, class:"text-decoration-none"%>
+            </i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<%# Modal %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Extender horas</h5>
+      </div>
+      <div class="modal-body">
+        <p>¿Cuantas horas desea extender?</p>
+        <div class="slider">
+          <%= simple_form_for(@rental) do |f| %>
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :vehicle_id %> 
+          <%= f.input :hours, as: :range, in: 1..24, step: 1, label: false, input_html: { max: 24, min: @rental.hours+1, oninput:"updateTextInput(this.min,this.value)", id: "rangev" } %>
+          <span id="rangeValue" value="" default="1"></span>
+          <script>
+            function updateTextInput(min,val) {
+              aux = parseInt(val) - (parseInt(min) - 1);
+              console.log(aux);
+              document.getElementById('rangeValue').innerHTML=aux; 
+            }
+          </script>    
+        </div>
+      </div>
+      <div class="modal-footer">
+          <%= f.button :submit, "Extender", class:"btn btn-primary", id:"btnActualizar" %>
+        <% end %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal 2-->
+<div class="modal fade" id="passten" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Han pasado 10 minutos</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Ha pasado 10 minutos desde que inició el alquiler, ya no puedes reportar inconvenientes con el Vehiculo!
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal 3-->
+<div class="modal fade" id="tenless" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Se hacaba el tiempo...</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Quedan menos de 10 minutos para que finalice el alquiler!
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal 4-->
+<div class="modal fade" id="zeroless" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Se Termino el plazo de alquiler!</h5>
+      </div>
+      <div class="modal-body">
+        <%if @rental.hours < 24 %>
+          <p>
+            Se ha terminado el plazo de alquiler!
+            Por favor amplie el tiempo de alquiler o finalice el alquiler,
+            de lo contrario se le cobrará una multa de $250 por cada 15 minutos que se exceda del tiempo de alquiler.
+          </p>
+        <%else%>
+          <p>
+            Se ha terminado el plazo de alquiler!
+            Por favor devuelva el vehiculo y finalice el alquiler!
+          </p>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>
+(function()
+{ 
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
+</script>
+
+
+
+

@@ -1,0 +1,32 @@
+<div>
+<!--create license partial from clicked user-->
+    <% if @user.license.image.attached?%>
+      <%= image_tag (@user.license.image), class:"card-img-top"%>
+    <% end %>
+  <p>
+    <strong>Usuario:</strong>
+    <!--get user name by its license user_id-->
+    <%= @user.email %>
+    <%# <%= license.user_id() %>
+  </p>
+
+  <p>
+    <strong>Autorizado:</strong>
+    <% if @user.license.authorized %>
+      Si
+    <% else %>
+      No
+    <%end%>
+    
+  </p>
+
+  <p>
+    <strong>Checkeado:</strong>
+     <% if @user.license.checked %>
+      Si
+     <% else %>
+      No
+     <%end%>
+  </p>
+   
+</div>

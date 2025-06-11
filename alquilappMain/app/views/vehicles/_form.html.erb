@@ -1,0 +1,39 @@
+ <%= simple_form_for (@vehicle) do |f| %>
+    <%= f.error_notification %>
+    <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-inputs">
+      <div class="form-outline mb-2">
+        <%= f.input :did, label: "Identificador", input_html:{class:"form-control form-control-lg"} %>
+      </div>
+      <div class="form-outline mb-2">
+        <%= f.input :patent, label: "Patente",input_html:{class:"form-control form-control-lg"} %>
+      </div>
+      <div class="form-outline mb-2">
+        <%= f.input :vehicle_type, label: "Tipo de Vehiculo", collection: Vehicle::Types, default: :auto, input_html:{class:"form-control form-control-lg"}%>
+      </div>
+      <div class="form-outline  mb-2">
+        <%= f.input :brand, label: "Marca",input_html:{class:"form-control form-control-lg"}%>
+      </div>
+      <div class="form-outline mb-2">
+        <%= f.input :model, label: "Modelo",input_html:{class:"form-control form-control-lg"} %>
+      </div>
+      <div class="form-outline mb-2">
+        <%= f.input :year, label: "Año",input_html:{class:"form-control form-control-lg"} %>
+      </div>
+      <div class="form-outline mb-3">
+        <%= f.input :features, label: "Caracteristicas", as: :check_boxes ,collection: Vehicle::Features, input_html:{class:"form-check-input mx-1 my-1"}, multiple: true,include_hidden: false%>
+      </div>
+      <div class="form-outline mb-2">
+        <%= f.input :image, label: "Imagen del Vehiculo",input_html:{class:"form-control form-control-lg"} %>
+      </div>
+    </div>
+
+  <div class="form-outline py-2 ">
+    <%= f.button :submit, "Guardar Borrador", class:"btn-secondary" %>
+    
+    <%# <%= f.button :submit, "Publicar", class:"btn-primary"%>
+      
+  </div>
+<% end %>
+
+

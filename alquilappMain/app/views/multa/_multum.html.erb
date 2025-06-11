@@ -1,0 +1,22 @@
+<div id="<%= dom_id multum %>">
+  <p>
+    <strong>Monto:</strong>
+    <%= multum.monto %>
+  </p>
+
+  <p>
+    <strong>Razon:</strong>
+    <%= multum.razon %>
+  </p>
+
+  <p>
+    <strong>Usuario:</strong>
+    <%= User.find(multum.user_id).full_name %>
+  </p>
+
+  <p>
+    <strong>Fecha:</strong>
+    <%= multum.created_at.strftime("%d/%m/%Y") %> <%= multum.created_at.strftime("%H:%M:%S") %>
+    </p>
+
+</div>

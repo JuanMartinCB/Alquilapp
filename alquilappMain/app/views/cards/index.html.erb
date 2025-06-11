@@ -1,0 +1,45 @@
+<head>
+  <%= stylesheet_link_tag "/assets/payment.css", "data-turbo-track": "reload" %>
+</head>
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-sm-8 col-md-10 col-lg-6 col-xl-9">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="margenesT" class="card-body p-5">
+                    <div class="col">
+                        <div class="row">
+                            <div class="title">
+                                <h2 class="mb-4 text-center">Mis Tarjetas</h2>
+                            </div>
+                            <% if user_signed_in? && @cards.any? %>
+                              <% @cards.each do |card| %>
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 ">
+                                    <%= render card %>
+                                    <div class="row">
+                                       <div class="col">
+                                            <%= link_to "Seleccionar", wtransactionc_path(card), class: "btn btn-primary w-100" %>
+                                        </div>
+                                        <div class="col">
+                                            <%= button_to "Borrar", card, method: :delete, class:"btn btn-danger w-100"%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% end %>
+                            <% else %>
+                                <h4 class="mb-4 text-center">No tienes ninguna tarjeta guardada</h4>
+                            <% end %>
+                        </div>
+                        <div class="row">
+                           <%= link_to "Nueva Tarjeta", new_card_path, class:"btn btn-success"%>
+                        </div>
+                        <div >
+                            <button type="button" class="btn btn-floating">
+                             <i class="bi bi-arrow-left-circle"> <%= link_to "Volver", wallet_path(current_user.id), class:"text-decoration-none"%> </i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

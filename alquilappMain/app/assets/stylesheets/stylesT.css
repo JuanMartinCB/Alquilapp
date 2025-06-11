@@ -1,0 +1,211 @@
+  /* clock */    
+  #titulo{
+    color: black;
+    font-weight: 100;
+    font-size: 30px;
+    margin: 40px 0px 20px;
+    text-align: center;
+  }
+  
+  #clockdiv{
+    font-family: sans-serif;
+    color: #fff;
+    /* display: inline-block; */
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  #clockdiv > div{
+    padding: 10px;
+    border-radius: 3px;
+    background: #212529;
+    display: inline-block;
+    margin-bottom: 1em;
+  }
+  
+  #clockdiv div > span{
+    padding: 15px;
+    border-radius: 3px;
+    background: rgb(255, 102, 0);
+    display: inline-block;
+  }
+  
+  .smalltext{
+    padding-top: 5px;
+    font-size: 16px;
+  }
+  /* clock */
+  /* Barra deslizante */
+  .slider {
+  width: 100%;
+  height: 1em;
+  padding: 30px;
+  background: #212529;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 15px 40px #7E6D5766;
+  }
+  .slider p {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Open Sans;
+  padding-left: 30px;
+  padding-top: 15px;
+  color: black;
+  }
+  .error{
+    color: red;
+  }
+  .error_notification{
+    color: red;
+  }
+  .slider span {
+    color:white
+  }
+  .slider input[type="range"] {
+  width: 420px;
+  height: 3px;
+  background: black;
+  border: none;
+  outline: none;
+  }
+  .slider input[type="range"]::-webkit-slider-thumb {
+  width: 30px;
+  height:30px;
+  background: black;
+  border: 2px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  }
+  .slider input[type="range"]::-webkit-slider-thumb:hover {
+  background: black;
+  }
+  /* Barra deslizante */
+  .column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+  }
+  
+  .about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+  
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+/* About_us */
+/* Logo navabar */
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+.gradient-customT{
+    background: linear-gradient(to left, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+.margenesT{
+    margin: 1em;
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* .titleT{
+    color: #322c2d;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2em;
+} */
+/* .margenesT h2{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    font-style: italic;
+} */
+.margenesT h3{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    font-style: italic;
+}
+.margenesT div{
+    margin-bottom: 1em;
+}
+.botonRegisterT{
+    background-color: #322c2d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+}
+.botonLoginT{
+    /* background-color: rgb(255, 125, 0); */
+    /* color: #fff; */
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;   
+    text-align: center;
+    text-decoration-line: none;
+}
+/* border-style: dashed double none;border-color: rgba(0, 0, 0, 0.7) */
+
+.centrado{
+  text-align: center; 
+  vertical-align: middle;
+}

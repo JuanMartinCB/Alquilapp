@@ -1,0 +1,97 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-sm-8 col-md-12 col-lg-6 col-xl-9">
+      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="margenesT" class="card-body p-5">
+          <div class="titleT justify-center">
+            <h2 class="text-center mb-5">Mi billetera</h2>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="row">             
+                  <label>Saldo</label>
+                  <% if @wallet.balance < 0 %>
+                    <span class="form-control text-danger">
+                      <%= @wallet.balance %>
+                    </span>
+                  <% else %>
+                    <span class="form-control">$<%= @wallet.balance%></span>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <table class="table table-striped">
+                    <thead class="centrado">
+                      <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Ticket</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%if @wallet.wtransaction.any?%>
+                        <% @wallet.wtransaction.order('created_at DESC').first(10).each do |transaction| %>
+                          <tr class="centrado">
+                            <td><%= transaction.created_at.strftime("%d/%m/%Y") %></td>
+                            <%case transaction.wtype%>
+                            <%when "Ingreso"%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><span class="badge bg-success"><%= transaction.wtype %></span></td>
+                            <%when "Multa"%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><span class="badge bg-danger"><%= transaction.wtype %></span></td>
+                            <%when "Alquiler"%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><span class="badge bg-info"><%= transaction.wtype %></span></td>
+                            <%when "Alquiler Extendido"%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><span class="badge bg-info"><%= transaction.wtype %></span></td>
+                            <%when "Alquiler OverTime"%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><span class="badge bg-warning"><%= transaction.wtype %></span></td>
+                            <%else%>
+                              <td>$<%= transaction.entry %></td>
+                              <td><%= transaction.wtype %></td>
+                            <%end%>
+                            <td class="centrado"> 
+                              <% if Ticket.find_by(wtransaction_id: transaction.id)%>
+                                <%= link_to comprobante_path(Ticket.find_by(wtransaction_id: transaction.id).id )do%>
+                                  <i class="bi bi-arrow-down-circle-fill text-primary"></i>
+                                <%end%>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      <%else%>
+                        <tr>
+                          <td colspan="3">No hay Actividad</td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 p-4">
+                <div class="row ">
+                  <%= link_to "Agregar Saldo", cards_path, class: "btn btn-outline-dark" %>
+                </div>
+                <div class="row">
+                  <%= link_to "Nueva Tarjeta", new_card_path, class: "btn btn-outline-dark" %>
+                </div>
+                <div class="row">
+                  <%= link_to "Multas", multa_path, class: "btn btn-outline-dark" %>
+                </div>
+                <div>
+              </div>
+            </div>
+          </div>
+          <!--div class="row ">    
+            <%= link_to "Volver", :back, class:"btn btn-control btn-outline-dark w-50" %>
+          </div-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

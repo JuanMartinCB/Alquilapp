@@ -1,0 +1,38 @@
+<div id="<%= dom_id card %>">
+  <div class="debit-card mb-3">
+    <div class="d-flex flex-column">
+      <label class="d-block">
+        <div class="d-flex position-relative">
+          <div>
+            <% case card.company %>
+              <% when "Visa" %>
+                <img src="https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png" class="visa" alt=""> 
+              <% when "MasterCard" %>
+                <img src= "https://www.freepnglogos.com/uploads/mastercard-png/mastercard-marcus-samuelsson-group-2.png" class="master" alt="">
+                
+              <% when "AmericanExpress" %>
+                <img src="https://i.ibb.co/qg0jsnC/american-express-logo-wordmark-detail.png" class="visa" alt=""> 
+              <% when "DinersClub" %>
+                <%= image_tag "https://ibb.co/TWbJ99c", class: "p-debit-card__logo" %>
+              <% when "Discover" %>
+                <img src="https://i.ibb.co/TKMc2NR/png-clipart-discover-card-discover-financial-services-credit-card-bank-finance-credit-card-text-oran.png" class="visa" alt=""> 
+
+              <% when "JCB" %>
+                <%= image_tag "#", class: "p-debit-card__logo" %>
+            <%end %>
+            <p class="mt-2 mb-4 text-white fw-bold"><%= card.name %></p>
+          </div>
+        </div>
+      </label>
+      <div class="mt-auto fw-bold d-flex align-items-center justify-content-between">
+        <p class="text-white">**** **** **** <%= card.last_four_digits%></p>
+        <% if card.expiration_month<10%>
+          <p class="text-white">0<%= card.expiration_month%>/<%= card.expiration_year.to_s[-2..-1].to_i%></p>
+        <% else %>
+          <p class="text-white"><%= card.expiration_month%>/<%= card.expiration_year.to_s[-2..-1].to_i%></p>
+        <% end %>
+      </div>
+     
+    </div>
+  </div>
+</div>

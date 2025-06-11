@@ -1,0 +1,27 @@
+
+<%= simple_form_for(@rental) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="form-inputs">
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :vehicle_id %>  
+  </div>
+  <div style="border: solid;margin: 10px 0px"></div>
+  
+  <div>
+      <p style="text-align: center; margin: 5px 0px">Cantidad de horas a alquilar el Vehiculo</p>
+      <div class="slider">
+        <%= f.input :hours, label: false, as: :range, input_html:{ min:"1", max:"24",value: "1", oninput:"updateTextInput(this.value)"}%>
+        <span id="rangeValue" value="" default="1"></span>
+      </div>
+  </div>
+  <script>
+    function updateTextInput(val) {
+      document.getElementById('rangeValue').innerHTML=val; 
+    }
+  </script>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Confirmar" , class:"btn btn-success w-100" %>
+  </div>
+<% end %>

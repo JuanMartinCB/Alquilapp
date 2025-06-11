@@ -1,0 +1,66 @@
+<div id="<%= dom_id vehicle %>">
+  <div class="row">
+    <div class="col">
+      <p>
+        <% if user_signed_in? && (current_user.admin? || current_user.supervisor?) %>
+          <strong>Identificador: </strong>
+          <%= vehicle.did %>
+        <% end %>
+      </p>
+      <p>
+        <strong>Marca: </strong>
+        <%= vehicle.brand %>
+      </p>
+      <p>
+        <strong>Modelo: </strong>
+        <%= vehicle.model %>
+      </p>
+      <p>
+        <strong>Patente: </strong>
+        <%= vehicle.patent %>
+      </p>
+      <p>
+        <strong>Año: </strong>
+        <%= vehicle.year %>
+      </p>
+      <p>
+        <% if (current_user.admin? || current_user.supervisor?) %>    
+          <strong>State: </strong>
+          <% case vehicle.state%>
+          <% when "published"%>
+            <span class="badge bg-success">Publicado</span>
+          <% when "blocked"%>
+            <span class="badge bg-warning">Bloqueado</span>
+          <% when "in_use"%>
+            <span class="badge bg-danger">Alquilado</span>
+          <% when "draft"%>
+            <span class="badge bg-secondary">Borrador</span>
+          <% end %>
+        <%end%>
+
+      </p>
+      <div class="row">
+        <strong>Caracteristicas:</strong>
+        <% vehicle.features.each do |feature| %>
+          <li><%= feature %></li>
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <% if vehicle.image.attached?%>
+          <%= image_tag (vehicle.image), class:"card-img-top"%>
+        <% end %>
+      </div>
+     <div class="map-container">  
+        <div id="map" user-lat="<%= session[:lat] %>" user-lng="<%= session[:lng] %>" vehicle-lat="<%= vehicle.location.x %>" vehicle-lng="<%= vehicle.location.y %>"></div>
+        <!--div id="map" user-lat="<%= session[:lat] %>" user-lng="<%= session[:lng] %>"></div-->
+        </div>
+          <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeU-u04DfhDJ1HqNk6kDhNSxcabOU8l8&callback=initMap&v=weekly" async efer
+          ></script>
+      </div>
+    </div>         
+  </div>
+</div>
+

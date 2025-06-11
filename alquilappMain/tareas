@@ -1,0 +1,27 @@
+LEO
+Main View
+
+ -Imagen de la plata de dimensiones correctas ** Con leyenda sobre la misma
+ -Considerar agregar imagenes de autos en la parte inferior
+ -Agregar Logo al Footer
+ -Reemplazar el nombre por el logo
+ -Mover menu del nav bar mas al centro
+ -Condicionar vista dependiendo de estador y/o privilegio del Usuario
+
+Autos
+  -Preview de imagen en cargar y editar auto
+
+Alquiler
+ -Agregar campo de State
+
+Usuario
+  -Arreglar validaciones
+
+Application
+   -revisar require
+
+Simple_Form
+   -revisar notificaciones
+
+
+

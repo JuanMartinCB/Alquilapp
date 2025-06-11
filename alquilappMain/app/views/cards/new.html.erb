@@ -1,0 +1,26 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-sm-8 col-md-10 col-lg-6 col-xl-9">
+      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+        <div class="margenesT" class="card-body p-5">
+          <div class="col">
+            <div class="row">
+              <div class="card">
+                <div class="card-header">
+                  <strong>Ingrese su Tarjeta</strong>
+                </div>
+                <%= render "form", card: @card %>
+              </div>
+              <div>
+                <button type="button" class="btn btn-floating">
+                  <i class="bi bi-arrow-left-circle"> <%= link_to "Volver", :back, class:"text-decoration-none"%> </i>
+                </button>
+                <%= link_to "Cancelar", root_path, class:"btn btn-sm " %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

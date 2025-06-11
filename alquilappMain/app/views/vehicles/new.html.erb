@@ -1,0 +1,13 @@
+<section class="px-4 py-5 bg-dark-custom" style=" border-radius: .5rem .5rem 0 0;">
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-8 col-xxl-4">
+    <div class="card shadow" style="border-radius: 1rem;">
+      <div class="card-body p-5 text center">
+        <h4>Nuevo Vehiculo</h4> 
+        <%= render "form", vehicle: @vehicle %>
+        <%= link_to "Volver a Vehiculos", vehicles_path, class: "btn-link" %>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

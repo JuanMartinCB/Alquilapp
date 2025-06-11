@@ -1,0 +1,20 @@
+<section class="px-4 py-5 gradient-custom" style=" border-radius: .5rem .5rem 0 0;">
+  <div class="row d-flex justify-content-center align-items-center vh-100">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-6 col-xxl-4">
+      <div class="card shadow" style="border-radius: 1rem;">
+        <div class="card-body p-5 text center">
+          <h1>Ingrese Monto</h1>
+          <%= render "form", wtransaction: @wtransaction %>
+          <br>
+          <div>
+            <div class="text-left">
+              <button type="button" class="btn btn-floating">
+                <i class="bi bi-arrow-left-circle"> <%= link_to "Volver", cards_path, class:"text-decoration-none"%> </i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

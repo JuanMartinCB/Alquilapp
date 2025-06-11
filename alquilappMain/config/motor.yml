@@ -1,0 +1,176 @@
+---
+engine_version: 0.4.0
+file_version: 2022-11-26 22:35:50.688005000 Z
+resources:
+- name: card
+  preferences:
+    visible: false
+  updated_at: 2022-11-21 20:20:33.078910000 +00:00
+- name: license
+  preferences:
+    display_name: Licencias
+    columns:
+    - display_name: Usuario
+      reference:
+        name: user
+        display_name: User
+        model_name: user
+        reference_type: belongs_to
+        foreign_key: user_id
+        primary_key: id
+        options: {}
+        polymorphic: 
+        virtual: false
+      name: user_id
+    - display_name: Licencia
+      reference:
+        name: image_attachment
+        display_name: Image attachment
+        model_name: active_storage/attachment
+        reference_type: has_one
+        foreign_key: record_id
+        primary_key: id
+        options: {}
+        polymorphic: 
+        virtual: false
+      name: image_attachment
+    - display_name: Autorizada
+      name: authorized
+    - display_name: Chekeada
+      name: checked
+    - access_type: hidden
+      name: updated_at
+    - access_type: hidden
+      name: created_at
+    tabs:
+    - visible: false
+      name: audits
+    - visible: false
+      name: notes
+  updated_at: 2022-11-21 20:23:50.265483000 +00:00
+- name: multum
+  preferences:
+    visible: false
+  updated_at: 2022-11-26 22:35:50.688005000 +00:00
+- name: rental
+  preferences:
+    visible: false
+  updated_at: 2022-11-21 20:20:38.887846000 +00:00
+- name: user
+  preferences:
+    display_name: Usuarios
+    columns:
+    - access_type: read_write
+      reference:
+        name: wallet
+        display_name: Wallet
+        model_name: wallet
+        reference_type: has_one
+        foreign_key: user_id
+        primary_key: id
+        options: {}
+        polymorphic: 
+        virtual: false
+      display_name: Billetera
+      name: wallet
+    - display_name: Licencia
+      reference:
+        name: license
+        display_name: License
+        model_name: license
+        reference_type: has_one
+        foreign_key: user_id
+        primary_key: id
+        options: {}
+        polymorphic: 
+        virtual: false
+      name: license
+    - display_name: Nombre
+      name: name
+    - display_name: Apellido
+      name: surname
+    - display_name: Telefono
+      name: phone
+    - display_name: DNI
+      name: dni
+    - access_type: hidden
+      name: reset_password_sent_at
+    - access_type: hidden
+      name: remember_created_at
+    - access_type: hidden
+      name: location_point
+    - access_type: hidden
+      name: state
+    - display_name: Administrador
+      name: admin_role
+    - display_name: Supervisor
+      name: supervisor_role
+    - display_name: Usuario
+      name: user_role
+    - access_type: hidden
+      name: updated_at
+    - access_type: hidden
+      name: created_at
+    - name: password
+      display_name: Contraseña
+      column_type: string
+      access_type: write_only
+      virtual: true
+      validators: []
+    - name: password_confirmation
+      display_name: Confirmar contraseña
+      column_type: string
+      access_type: write_only
+      virtual: true
+      validators: []
+    tabs:
+    - visible: false
+      name: audits
+    - visible: false
+      name: notes
+  updated_at: 2022-11-21 20:23:45.079960000 +00:00
+- name: vehicle
+  preferences:
+    display_name: Vehiculos
+    tabs:
+    - visible: false
+      name: audits
+    - visible: false
+      name: notes
+  updated_at: 2022-11-21 20:23:57.141815000 +00:00
+- name: wallet
+  preferences:
+    associations:
+    - visible: false
+      name: wtransaction
+    - visible: false
+      name: card
+    columns:
+    - access_type: hidden
+      name: updated_at
+    - access_type: hidden
+      name: created_at
+    - access_type: read_write
+      name: id
+  updated_at: 2022-11-25 17:39:37.245860000 +00:00
+- name: wtransaction
+  preferences:
+    visible: false
+  updated_at: 2022-11-21 20:20:41.693941000 +00:00
+configs:
+- key: header.links
+  value:
+  - name: "⭐ Star on GitHub"
+    path: https://github.com/motor-admin/motor-admin-rails
+  updated_at: 2022-11-26 22:08:56.969866000 +00:00
+queries: []
+dashboards: []
+forms: []
+alerts: []
+api_configs:
+- id: 1
+  name: origin
+  url: "/"
+  preferences: {}
+  description: 
+  updated_at: 2022-11-26 22:08:56.993960000 +00:00

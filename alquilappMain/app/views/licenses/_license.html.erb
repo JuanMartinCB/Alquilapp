@@ -1,0 +1,35 @@
+<div id="<%= dom_id license %>">
+    <!--add a link to the corresponding profile of the license user-->
+    <div class="text-center">
+        <%= link_to "Ver perfil de usuario", profile_path(User.find(license.user_id).id) %>
+        <!--<%= User.find(license.user_id).id%>-->
+    </div>
+    <% if license.image.attached?%>
+      <%= image_tag (license.image), class:"card-img-top"%>
+    <% end %>
+  <p>
+    <strong>Usuario:</strong>
+    <!--get user name by its license user_id-->
+    <%= User.find(license.user_id).email %>
+    <%# <%= license.user_id() %>
+  </p>
+
+  <p>
+    <strong>Autorizado:</strong>
+    <% if license.authorized %>
+      Si
+    <% else %>
+      No
+    <%end%>
+    
+  </p>
+
+  <p>
+    <strong>Checkeado:</strong>
+    <% if license.checked %>
+      Si
+    <% else %>
+      No
+    <%end%>
+  </p>
+</div>

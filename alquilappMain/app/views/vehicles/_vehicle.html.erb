@@ -1,0 +1,20 @@
+<div id="<%= dom_id vehicle %>">
+  <p>
+    <% if user_signed_in? && (current_user.admin? || current_user.supervisor?) %>
+      <strong>Identificador: </strong>
+      <%= vehicle.did %>
+    <% end %>
+  </p>
+
+  <p class="text-center m-2">
+    <strong>
+    <%= vehicle.brand %>
+    <%= vehicle.model %>
+    <%= vehicle.year %>
+    </strong>
+    <% if vehicle.image.attached?%>
+      <%= image_tag (vehicle.image), class:"card-img-top"%>
+    <% end %>
+  </p>
+
+</div>

@@ -1,0 +1,26 @@
+<div id="<%= dom_id incident %>">
+  <p>
+    <strong>Usuario:</strong>
+    <%= User.find(incident.user_id).name %> <%= User.find(incident.user_id).surname %> 
+  </p>
+
+  <p>
+    <strong>Vehiculo:</strong>
+    <%= incident.vehicle_id %>
+  </p>
+
+  <p>
+    <strong>Descripción:</strong>
+    <%= incident.description %>
+  </p>
+
+  <%# <p>
+  <strong>Imagen:</strong>
+    <%if incident.image.attached?%>
+      <%#= image_tag (incident.image)%>
+    <%# end %>
+  <%#/p> %>
+
+
+
+</div>
