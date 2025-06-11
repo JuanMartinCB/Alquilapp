@@ -1,0 +1,2 @@
+# Alquilapp
+Aplicación web desarrollada en Ruby on Rails (frontend con Bootstrap) con sistema de login, verificación de documentos, billetera digital integrada con MercadoPago, panel administrativo para gestión de vehículos y empleados, almacenamiento de imágenes en base de datos Amazon, y mapa interactivo de La Plata para visualización de vehículos disponibles. Proyecto desarrollado utilizando metodología ágil Scrum con participación activa del cliente.
